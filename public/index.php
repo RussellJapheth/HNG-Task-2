@@ -5,6 +5,12 @@ require_once __DIR__ . '/../vendor/autoload.php';
 Flight::route(
     '/',
     function () {
+        Flight::redirect('/api/');
+    }
+);
+Flight::route(
+    '/api',
+    function () {
         Flight::json(
             [
                 "slackUsername" => "russell",

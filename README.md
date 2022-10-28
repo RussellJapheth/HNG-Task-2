@@ -4,7 +4,13 @@
 
 ```js
 (async () => {
-    const response = await fetch("/");
+    const response = await fetch("/api/");
     console.log(await response.json());
 })();
+```
+
+## Installation
+
+```bash
+composer install
 ```
