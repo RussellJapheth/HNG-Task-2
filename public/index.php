@@ -11,6 +11,7 @@ Flight::route(
 Flight::route(
     '/api',
     function () {
+        header("Access-Control-Allow-Origin: *");
         Flight::json(
             [
                 "slackUsername" => "russell",
