@@ -1,5 +1,7 @@
 <?php
 
+use Russell\HNG\MathHandler;
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 Flight::route(
@@ -8,8 +10,9 @@ Flight::route(
         Flight::redirect('/api/');
     }
 );
+
 Flight::route(
-    '/api',
+    'GET /api',
     function () {
         header("Access-Control-Allow-Origin: *");
         Flight::json(
@@ -20,6 +23,22 @@ Flight::route(
                 "bio" => "Backend Developer | Technical Writer | Linux Advocate | Food Enthusiast"
             ]
         );
+    }
+);
+
+Flight::route(
+    'POST /api',
+    function () {
+        header("Access-Control-Allow-Origin: *");
+        $handler = new MathHandler(Flight::request()->data);
+
+        $result = $handler->getResult();
+
+        if (empty($result->operation_type)) {
+            Flight::json($result, 500);
+            return;
+        }
+        Flight::json($result);
     }
 );
 
